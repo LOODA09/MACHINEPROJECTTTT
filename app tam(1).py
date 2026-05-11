@@ -37,37 +37,64 @@ st.markdown("""
         color: #000000 !important;
     }
 
-    /* ===== GLOBAL STYLES ===== */
-    .main-header {
-        text-align: center;
-        padding: 40px 0 20px 0;
-        background: #bae6fd; /* Baby Blue Header Area */
-        border-radius: 0 0 40px 40px;
-        margin-bottom: 30px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
-    .main-header h1 {
-        font-size: 2.8rem;
-        color: #000000 !important;
-        font-weight: 800;
-        margin-bottom: 5px;
-    }
-    .main-header p {
-        color: #000000 !important;
-        font-size: 1.1rem;
-        font-weight: 600;
+    /* ===== HERO HEADER SECTION ===== */
+    .hero-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        background: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 100%);
+        padding: 60px 40px;
+        border-radius: 0 0 50px 50px;
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
 
-    /* ===== START SCREEN OVERLAY ===== */
-    .splash-overlay {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: #0ea5e9;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 99999;
+    .hero-col {
+        position: relative;
+        text-align: center;
+        z-index: 2;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: #0369a1 !important;
+        margin: 0;
+        letter-spacing: -2px;
+    }
+
+    /* Revolving Rings Animation */
+    .revolving-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 2px dashed rgba(14, 165, 233, 0.3);
+        border-radius: 50%;
+        z-index: 1;
+    }
+    .ring-1 { width: 300px; height: 300px; animation: rotate 10s linear infinite; }
+    .ring-2 { width: 250px; height: 250px; animation: rotate 15s linear infinite reverse; }
+
+    @keyframes rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    /* ===== UI CARD ANIMATIONS ===== */
+    .input-group-card {
+        background-color: rgba(255, 255, 255, 0.8) !important;
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 25px;
+        border: 1px solid #bae6fd;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    .input-group-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(14, 165, 233, 0.1);
+        border-color: #7dd3fc;
     }
     .splash-icon { font-size: 6rem; margin-bottom: 20px; color: white; }
     .splash-title { font-size: 2.5rem; color: #fff; font-weight: 800; }
@@ -193,9 +220,15 @@ except Exception as e:
 # UI HEADER
 # ============================================================
 st.markdown("""
-<div class="main-header">
-    <h1>Smart hotel prediction</h1>
-    <p>Modern Hotel Intelligence Dashboard</p>
+<div class="hero-container">
+    <div class="revolving-ring ring-1"></div>
+    <div class="revolving-ring ring-2"></div>
+    <div class="hero-col">
+        <h1 class="hero-title">Smart Hotel</h1>
+    </div>
+    <div class="hero-col">
+        <h1 class="hero-title">Prediction</h1>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 

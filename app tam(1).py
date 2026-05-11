@@ -110,20 +110,22 @@ st.markdown("""
 
     /* ===== INPUT CARDS ===== */
     .input-group-card {
-        background-color: #f8fafc !important;
-        border-radius: 15px;
-        padding: 20px;
-        margin-bottom: 15px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        border-left: 5px solid #0ea5e9;
+        background-color: rgba(255, 255, 255, 0.8) !important;
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 25px;
+        border: 1px solid #bae6fd;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }
     .input-label { 
         font-weight: 800 !important; 
         color: #0369a1 !important; 
-        margin-bottom: 12px; 
-        font-size: 0.9rem; 
+        margin-bottom: 15px; 
+        font-size: 1.1rem !important; 
         text-transform: uppercase;
         display: block;
+        border-bottom: 2px solid #0ea5e9;
+        padding-bottom: 5px;
     }
 
     /* ===== RESULT BOX ===== */
@@ -192,7 +194,7 @@ except Exception as e:
 # ============================================================
 st.markdown("""
 <div class="main-header">
-    <h1>Khaled's Booking Predictor</h1>
+    <h1>Smart hotel prediction</h1>
     <p>Modern Hotel Intelligence Dashboard</p>
 </div>
 """, unsafe_allow_html=True)

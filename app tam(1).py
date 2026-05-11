@@ -110,14 +110,21 @@ st.markdown("""
 
     /* ===== INPUT CARDS ===== */
     .input-group-card {
-        background: white;
+        background-color: #f8fafc !important;
         border-radius: 15px;
         padding: 20px;
         margin-bottom: 15px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        border-top: 4px solid #38bdf8;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #0ea5e9;
     }
-    .input-label { font-weight: 800; color: #0369a1; margin-bottom: 12px; font-size: 0.8rem; text-transform: uppercase; }
+    .input-label { 
+        font-weight: 800 !important; 
+        color: #0369a1 !important; 
+        margin-bottom: 12px; 
+        font-size: 0.9rem; 
+        text-transform: uppercase;
+        display: block;
+    }
 
     /* ===== RESULT BOX ===== */
     .result-box {
@@ -152,7 +159,7 @@ if 'visited' not in st.session_state:
     splash_placeholder.markdown("""
     <div class="splash-overlay">
         <div class="splash-icon">🏨</div>
-        <div class="splash-title">Hotel Cancellation Prediction</div>
+        <div class="splash-title">Smart hotel prediction</div>
         <div class="splash-bar-container"><div class="splash-bar"></div></div>
     </div>
     """, unsafe_allow_html=True)
@@ -167,7 +174,7 @@ if 'visited' not in st.session_state:
 def load_artifacts():
     with open("model.pkl", "rb") as f:
         all_models = pickle.load(f)
-    with open("scaler.pkl", "rb") as f:
+    with open("final_scaler.pkl", "rb") as f:
         feature_scaler = pickle.load(f)
     with open("model_config.pkl", "rb") as f:
         config = pickle.load(f)
@@ -219,9 +226,9 @@ with st.container():
     
     c7, c8 = st.columns(2)
     with c7:
-        parking = st.radio("Requires Parking?", ["No", "Yes"], horizontal=True)
+        parking = st.selectbox("Requires Parking?", ["No", "Yes"])
     with c8:
-        first_time = st.radio("Is New Guest?", ["No", "Yes"], horizontal=True)
+        first_time = st.selectbox("Is New Guest?", ["No", "Yes"])
     st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("<div class='input-group-card'>", unsafe_allow_html=True)

@@ -203,7 +203,7 @@ if 'visited' not in st.session_state:
 def load_artifacts():
     with open("model.pkl", "rb") as f:
         all_models = pickle.load(f)
-    with open("final_scaler.pkl", "rb") as f:
+    with open("scaler_v2.pkl", "rb") as f:
         feature_scaler = pickle.load(f)
     with open("model_config.pkl", "rb") as f:
         config = pickle.load(f)

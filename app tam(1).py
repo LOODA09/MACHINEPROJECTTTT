@@ -538,6 +538,8 @@ if st.button("🔮 Predict Booking Status", use_container_width=True, type="prim
 
     # Run sklearn models
     for model_key, display_info in model_display.items():
+        if model_key not in loaded_models:
+            continue
         predictor = loaded_models[model_key]
         forecast = predictor.predict(input_dataframe)[0]
 

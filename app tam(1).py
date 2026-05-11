@@ -29,7 +29,12 @@ st.markdown("""
     html, body, [data-testid="stAppViewContainer"] {
         font-family: 'Segoe UI', sans-serif;
         background-color: #f0f9ff; /* Very Light Baby Blue */
-        color: #1e293b;
+        color: #000000 !important;
+    }
+
+    /* Force all text to black */
+    .stMarkdown, .stText, .stHeader, h1, h2, h3, p, span, label {
+        color: #000000 !important;
     }
 
     /* ===== GLOBAL STYLES ===== */
@@ -43,12 +48,12 @@ st.markdown("""
     }
     .main-header h1 {
         font-size: 2.8rem;
-        color: #0369a1;
+        color: #000000 !important;
         font-weight: 800;
         margin-bottom: 5px;
     }
     .main-header p {
-        color: #075985;
+        color: #000000 !important;
         font-size: 1.1rem;
         font-weight: 600;
     }
@@ -147,7 +152,7 @@ if 'visited' not in st.session_state:
     splash_placeholder.markdown("""
     <div class="splash-overlay">
         <div class="splash-icon">🏨</div>
-        <div class="splash-title">KHALED ANALYTICS</div>
+        <div class="splash-title">Hotel Cancellation Prediction</div>
         <div class="splash-bar-container"><div class="splash-bar"></div></div>
     </div>
     """, unsafe_allow_html=True)
@@ -270,8 +275,8 @@ if st.button("RUN ANALYSIS"):
     feat_row = get_features()
     input_df = pd.DataFrame([feat_row], columns=feature_names)
     
-    # FIXED SCALING: Using real Standard Scaler
-    input_df["average_price"] = loaded_scaler.transform(input_df[["average_price"]])
+    # FIXED SCALING: Using .values to bypass feature name strictness
+    input_df["average_price"] = loaded_scaler.transform(input_df[["average_price"]].values)
 
     results = []
     model_info = {
@@ -283,8 +288,9 @@ if st.button("RUN ANALYSIS"):
     for m_key, m_name in model_info.items():
         if m_key in loaded_models:
             mod = loaded_models[m_key]
-            pred = mod.predict(input_df)[0]
-            conf = mod.predict_proba(input_df)[0][1] if hasattr(mod, "predict_proba") else 0.5
+            # Use .values to avoid "feature names mismatch" error
+            pred = mod.predict(input_df.values)[0]
+            conf = mod.predict_proba(input_df.values)[0][1] if hasattr(mod, "predict_proba") else 0.5
             results.append({"Model": m_name, "Pred": "Stay" if pred == 1 else "Cancel", "Conf": conf})
 
     st.markdown("<div class='crossing-lines-bg'>", unsafe_allow_html=True)
